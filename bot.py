@@ -39,7 +39,7 @@ async def levelsystem(_, message):
     toggle = leveldb["ToggleDb"]["Toggle"] 
     if message.from_user:
         user = message.from_user.id
-        chat_id = "-1001756651556" 
+        chat_id = message.chat.id
         if user not in (
             await is_admins(chat_id)
         ):
@@ -55,12 +55,7 @@ async def levelsystem(_, message):
         await message.reply_text("Đã tắt cày cấp ảo nhận tiền thật")
 
 
-@bot.on_message(
-    (filters.text
-    )
-    & ~filters.private,
-    group=8,
-)
+@bot.on_message(filters.text & ~filters.private, group=8,)
 async def level(client, message):
     chat = message.chat.id
     user_id = message.from_user.id    
