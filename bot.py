@@ -76,7 +76,7 @@ async def level(client, message):
 
         if not message.from_user.is_bot:
             if xpnum is None:
-                newxp = {"level": user_id, "chatid": chat, "xp": 10}
+                newxp = {"level": user_id, "chatid": chat, "xp": 5}
                 level.insert_one(newxp)   
                     
             else:
