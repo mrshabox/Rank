@@ -1,23 +1,3 @@
-"""
-MIT License
-Copyright (C) 2021-2022 MetaVoid (MoeZilla) 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
 from pyrogram import Client , filters
 from pymongo import MongoClient
 import os
@@ -44,9 +24,9 @@ async def is_admins(chat_id: int):
         )
     ]
 
-levellink =["https://telegra.ph/file/6620fe683ff3989268c7f.mp4", "https://telegra.ph/file/c6bbce91cb75d4ab318ae.mp4", "https://telegra.ph/file/c2ac7b63d248f49da952c.mp4", "https://telegra.ph/file/b100466a5f0c42fa7255f.mp4", "https://telegra.ph/file/67c9dc7b59f78aa7aaf4c.mp4", "https://telegra.ph/file/06e2d74343e89c9d3cd12.mp4", "https://telegra.ph/file/88458a18eea8e86292b14.mp4", "https://telegra.ph/file/e3786d4f321ff4335a70f.mp4"]
-levelname = ["Team Rocket", "Stray God", "Vector", "Hero Association", "Z Warrior", "Black Knight", "Ghoul", "Overlord"]
-levelnum = [2,5,15,25,35,50,70,100]
+levellink =["https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif", "https://kimnhungtoeic.com/wp-content/uploads/2020/09/animation-birthdays070517-02.gif"]
+levelname = ["20.000đ", "50.000đ", "80.000đ", "110.000đ", "170.000đ", "190.000đ", "230.000đ", "500.000đ", "phần thưởng lớn nhất 1.000.000đ"]
+levelnum = [5,10,15,20,30,40,50,70, 100]
 
 
 
@@ -69,19 +49,15 @@ async def levelsystem(_, message):
     is_level = toggle.find_one({"chat_id": message.chat.id})
     if not is_level:
         toggle.insert_one({"chat_id": message.chat.id})
-        await message.reply_text("Level System Enable")
+        await message.reply_text("Đã bật cày cấp ảo nhận tiền thật")
     else:
         toggle.delete_one({"chat_id": message.chat.id})
-        await message.reply_text("Level System Disable")
+        await message.reply_text("Đã tắt cày cấp ảo nhận tiền thật")
 
 
 @bot.on_message(
-    (filters.document
-     | filters.text
-     | filters.photo
-     | filters.sticker
-     | filters.animation
-     | filters.video)
+    (filters.text
+    )
     & ~filters.private,
     group=8,
 )
@@ -104,7 +80,7 @@ async def level(client, message):
                 level.insert_one(newxp)   
                     
             else:
-                xp = xpnum["xp"] + 10
+                xp = xpnum["xp"] + 5
                 level.update_one({"level": user_id, "chatid": chat}, {
                     "$set": {"xp": xp}})
                 l = 0
@@ -114,12 +90,12 @@ async def level(client, message):
                     l += 1
                 xp -= ((50*((l-1)**2))+(50*(l-1)))
                 if xp == 0:
-                    await message.reply_text(f"🌟 {message.from_user.mention}, You have reached level {l}**, Nothing can stop you on your way!")
+                    await message.reply_text(f"🌟 **Thông báo:** {message.from_user.mention} đã lên cấp {l}**")
     
                     for lv in range(len(levelname)) and range(len(levellink)):
                             if l == levelnum[lv]:            
                                 Link = f"{levellink[lv]}"
-                                await message.reply_video(video=Link, caption=f"{message.from_user.mention}, You have reached Rank Name **{levelname[lv]}**")
+                                await message.reply_video(video=Link, caption=f"Chúc mừng bạn **{message.from_user.mention}** đã chạm mốc và lĩnh được **{levelname[lv]}**. Gửi tin nhắn đến @ShaboxBot để lĩnh quà nhé. 💝🎁")
                   
 
                                
@@ -152,7 +128,7 @@ async def rank(client, message):
             r += 1
             if xpnum["level"] == k["level"]:
                 break                     
-        await message.reply_text(f"{message.from_user.mention} Level Info:\nLevel: {l}\nProgess: {xp}/{int(200 *((1/2) * l))}\n Ranking: {r}")
+        await message.reply_text(f"{message.from_user.mention}:\n**Level:** {l}\n**EXP:** {xp}/{int(200 *((1/2) * l))}\n Đã nhận: {r}")
 
 
 
