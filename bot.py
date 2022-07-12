@@ -39,7 +39,7 @@ async def levelsystem(_, message):
     toggle = leveldb["ToggleDb"]["Toggle"] 
     if message.from_user:
         user = message.from_user.id
-        chat_id = message.chat.id
+        chat_id = "-1001756651556" 
         if user not in (
             await is_admins(chat_id)
         ):
