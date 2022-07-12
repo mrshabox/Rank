@@ -16,7 +16,7 @@ bot = Client(
     bot_token = BOT_TOKEN
 )
 
-async def is_admins(chat_id: int):
+async def is_admins(client: bot, chat_id: int):
     return [
         member.user.id
         async for member in bot.iter_chat_members(
